@@ -40,6 +40,7 @@ input[type="submit"] {
 
 .nav {
     padding: 4px;
+    text-align: center;
 }
 
 textarea {
