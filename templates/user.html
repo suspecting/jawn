@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head><link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"></head>
+    <body>
+        <div class="main">
+            {% include 'header.html' %}
+            <table style="width:75%;">
+                <tr>
+                    <td><h2>{{ username }}</h2></td>
+                </tr>
+                <tr>
+                    <td><b>Rank:</b></td>
+                    <td><div class="{{ rank }}"><b>{{ rank }}</b></div></td>
+                </tr>
+                <tr>
+                    <td><b>Bio:</b></td>
+                    <td>{{ description }}</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head><link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"></head>
+    <body>
+        <h1></h1>
+        <div class="main">
+            {% include 'header.html' %}
+            <h2>Settings</h2>
+            <table style="width:75%;">
+                <tr>
+                    <td>Change Username:</td>
+                    <td><input type='text' name='username'></td>
+                </tr>
+                <tr>
+                    <td>Change Bio:</td>
+                    <td>
+                        <textarea name="description" rows="2" cols="20">
+
+                        </textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type='submit' value='Save'></td>
+                </tr>
+            </table>
+        </div>
+        {% include 'footer.html' %}
+    </body>
+</html>

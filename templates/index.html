@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head><link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"></head>
+    <body>
+        <h1></h1>
+        <div class="main">
+            {% include 'header.html' %}
+            <p>
+                Welcome to JAWN, a recreation of <a href="https://github.com/markmrgamer">goom</a>'s PenizNet.
+            </p>
+        </div>
+        {% include 'footer.html' %}
+    </body>
+</html>

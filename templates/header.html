@@ -1,0 +1,15 @@
+{% include 'config.html' %}
+
+<hr>
+{% if session.get('logged_in') == True %}
+    <div class="nav">
+        Logged in as <a href="/user/{{ session['username'] }}">{{ session['username'] }}</a>
+        | <a href="/logout">Log out</a> 
+        | <a href="/settings">Settings</a>
+        | <b>{{ session['dolla'] }}</b> dolla.
+    </div>
+    {% else %}
+        <p>Not logged in
+        &bull; <a href="/login">Log in</a></p>
+{% endif %}
+<hr>

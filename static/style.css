@@ -1,0 +1,52 @@
+body {
+    font-family: Verdana, sans-serif;
+    width: 40%;
+    margin: auto;
+    padding: 10px;
+}
+
+.main {
+    border: 1px solid black;
+    padding: 6px;
+    background: lightgrey;   
+}
+
+input[type="text"] {
+    border: 1px solid rgb(63, 63, 63);
+    padding: 4px;
+}
+
+h1 {
+    margin: 0;
+    padding: 10px;
+    padding-left: 0px;
+}
+
+input[type="submit"] {
+    padding: 6px;
+    border: 1px solid black;
+    font-weight: bold;
+}
+
+.Administrator { /* ...What, did you think I was gonna do it on the backend? You're insane. */
+    background-color: rgb(219, 84, 84);
+    padding: 2px;
+    color: black;
+    padding: 2px;
+    border-radius: 4px;
+    text-transform: lowercase;
+    font-weight: bold;
+}
+
+.nav {
+    padding: 4px;
+}
+
+textarea {
+  border: 1px solid black;
+  padding: 3px;
+}
+
+b {
+    color: darkgreen;
+}
