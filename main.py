@@ -21,7 +21,7 @@ cur = con.cursor()
 def main():
     return render_template('index.html')
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST']) # WIP: Add e-mail verification or something similar.
 def register():
     if request.method == 'POST':
         session['username'] = request.form['username']
