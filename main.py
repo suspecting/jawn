@@ -2,7 +2,7 @@
 # By Lua
 
 
-from flask import Flask, request, session, render_template, redirect, url_for
+from flask import Flask, request, session, render_template, redirect, url_for, flash
 from markupsafe import escape
 import sqlite3
 import uuid
@@ -11,8 +11,7 @@ import secret
 
 app = Flask(__name__)
 app.secret_key = secret.password
-con = sqlite3.connect("main.db")
-cur = con.cursor()
+con = sqlite3.connect("main.db", check_same_thread=False)
 
 
 # THE MEAT AND POTATOES ARE BELOW
@@ -26,6 +25,7 @@ def register():
     if request.method == 'POST':
         session['username'] = request.form['username']
         username = request.form['username']
+        cur = con.cursor()
         cur.execute("INSERT INTO users (user, userkey) VALUES (?, ?)", (f"{escape(username)}", str(uuid.uuid4())))
         con.commit()
         session['logged_in'] = True
@@ -40,6 +40,7 @@ def login():
     if request.method == 'POST':
         session['userkey'] = request.form['userkey']
         key = request.form['userkey']
+        cur = con.cursor()
         cur.execute('SELECT userkey FROM users WHERE userkey = ?', (key,))
         if key == cur.fetchone()[0]:
             session['logged_in'] = True
@@ -62,17 +63,24 @@ def logout():
 
 @app.route('/settings', methods=['GET', 'POST']) # This is a work in progress...
 def settings():
+    error = None
     if session['logged_in'] == False:
+        flash("You aren't logged in", 'error')
         return redirect(url_for('main'))
-    
+    if request.method == 'POST':
+        cur = con.cursor()
+        if request.form['description'] or request.form['username'] == '':
+            flash('Thats not a thing', 'error')
+            return render_template('settings.html')
+        else:
+            return "Kill"
+            
     return render_template('settings.html')
 
 @app.route('/user/<username>')
-def user(username): # This is the point where the code gets repetitive. Sorry. Actually, no I'm not.
-    cur.execute('SELECT user FROM users WHERE user = ?', (username,))
-    user = cur.fetchone()[0]
-    cur.execute('SELECT rank FROM users WHERE user = ?', (username,))
-    rank = cur.fetchone()[0]
-    cur.execute('SELECT description FROM users WHERE user = ?', (username,))
-    desc = cur.fetchone()[0]
-    return render_template('user.html', username=user, rank=rank, description=desc)
+def user(username): # Code no longer repetitive
+    cur = con.cursor()
+    cur.execute('SELECT user, rank, description FROM users WHERE user = ?', (username,))
+    user, rank, description = cur.fetchone()
+    return render_template('user.html', username=user, rank=rank, description=description)
+    

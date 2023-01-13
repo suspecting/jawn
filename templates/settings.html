@@ -7,6 +7,8 @@
             {% include 'header.html' %}
             <h2>Settings</h2>
             <table style="width:75%;">
+                {% include 'error.html' %}
+            <form method="post">
                 <tr>
                     <td>Change Username:</td>
                     <td><input type='text' name='username'></td>
@@ -14,14 +16,13 @@
                 <tr>
                     <td>Change Bio:</td>
                     <td>
-                        <textarea name="description" rows="2" cols="20">
-
-                        </textarea>
+                        <textarea name="description" rows="2" cols="20"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <td><input type='submit' value='Save'></td>
                 </tr>
+            </form>
             </table>
         </div>
         {% include 'footer.html' %}
